@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pomodoro + Notas</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>Pomodoro</h1>
+      <button id="theme-toggle" class="icon-btn" title="Cambiar tema" aria-label="Cambiar tema">🌙</button>
+    </header>
+
+    <section class="timer-card">
+      <div class="mode-tabs">
+        <button class="mode-tab active" data-mode="work">Enfoque</button>
+        <button class="mode-tab" data-mode="short">Descanso corto</button>
+        <button class="mode-tab" data-mode="long">Descanso largo</button>
+      </div>
+
+      <div class="timer-display">
+        <span id="time">25:00</span>
+      </div>
+
+      <div class="timer-controls">
+        <button id="start-pause" class="btn primary">Iniciar</button>
+        <button id="reset" class="btn">Reiniciar</button>
+      </div>
+
+      <div class="cycle-info">
+        <span id="cycle-count">Ciclos completados: 0</span>
+      </div>
+    </section>
+
+    <section class="notes-card">
+      <h2>Notas rápidas</h2>
+      <form id="note-form" class="note-form">
+        <input id="note-input" type="text" placeholder="Añadir una tarea..." autocomplete="off" />
+        <button type="submit" class="btn primary">Añadir</button>
+      </form>
+      <ul id="note-list" class="note-list"></ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
