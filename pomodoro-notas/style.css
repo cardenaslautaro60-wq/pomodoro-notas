@@ -221,3 +221,21 @@ body {
   text-align: center;
   padding: 8px 0;
 }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.game-link {
+  font-size: 13px;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid currentColor;
+  color: inherit;
+  opacity: 0.75;
+}
+
+.game-link:hover { opacity: 1; }

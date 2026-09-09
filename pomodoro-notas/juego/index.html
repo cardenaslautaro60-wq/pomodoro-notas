@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Duelo Orbital — 2 jugadores</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="stage">
+    <canvas id="canvas"></canvas>
+
+    <!-- Controles táctiles jugador 2 (arriba, girados 180°) -->
+    <div class="touch touch-top" id="touch-p2">
+      <button class="pad" data-key="ArrowLeft">◀</button>
+      <button class="pad" data-key="ArrowUp">▲</button>
+      <button class="pad" data-key="ArrowRight">▶</button>
+      <button class="pad fire" data-key="Slash">DISPARAR</button>
+    </div>
+
+    <!-- Controles táctiles jugador 1 (abajo) -->
+    <div class="touch touch-bottom" id="touch-p1">
+      <button class="pad" data-key="KeyA">◀</button>
+      <button class="pad" data-key="KeyW">▲</button>
+      <button class="pad" data-key="KeyD">▶</button>
+      <button class="pad fire" data-key="Space">DISPARAR</button>
+    </div>
+
+    <!-- Menú: pertenece al jugador 1 (orientado hacia abajo) -->
+    <div id="menu" class="overlay">
+      <div class="panel">
+        <h1>Duelo Orbital</h1>
+        <p class="sub">Pantalla dividida · 2 jugadores · un solo dispositivo</p>
+
+        <div class="rows">
+          <div class="row">
+            <span>Partida</span>
+            <div class="opts" data-setting="rondas">
+              <button data-value="2">Mejor de 3</button>
+              <button data-value="3" class="on">Mejor de 5</button>
+              <button data-value="4">Mejor de 7</button>
+            </div>
+          </div>
+          <div class="row">
+            <span>Velocidad</span>
+            <div class="opts" data-setting="velocidad">
+              <button data-value="0.85">Tranquila</button>
+              <button data-value="1" class="on">Normal</button>
+              <button data-value="1.25">Frenética</button>
+            </div>
+          </div>
+          <div class="row">
+            <span>Mejoras</span>
+            <div class="opts" data-setting="powerups">
+              <button data-value="1" class="on">Sí</button>
+              <button data-value="0">No</button>
+            </div>
+          </div>
+          <div class="row">
+            <span>Sonido</span>
+            <div class="opts" data-setting="sonido">
+              <button data-value="1" class="on">Sí</button>
+              <button data-value="0">No</button>
+            </div>
+          </div>
+        </div>
+
+        <button id="play" class="cta">JUGAR</button>
+
+        <div class="controls">
+          <div>
+            <strong>Jugador 1 (abajo)</strong>
+            <span>A / D girar · W acelerar · ESPACIO disparar</span>
+          </div>
+          <div>
+            <strong>Jugador 2 (arriba)</strong>
+            <span>← / → girar · ↑ acelerar · / disparar</span>
+          </div>
+          <div class="hint">P o ESC: pausa (jugador 1 controla el menú)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pausa / fin de partida -->
+    <div id="pause" class="overlay hidden">
+      <div class="panel small">
+        <h2 id="pause-title">Pausa</h2>
+        <p id="pause-text" class="sub"></p>
+        <button id="resume" class="cta">Continuar</button>
+        <button id="tomenu" class="ghost">Volver al menú</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
