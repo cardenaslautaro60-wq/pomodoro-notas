@@ -52,7 +52,8 @@ canvas {
 
 .pad {
   pointer-events: auto;
-  flex: 0 0 68px;
+  flex: 0 1 68px;
+  min-width: 0;
   height: 62px;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -63,7 +64,7 @@ canvas {
 }
 
 .pad.fire {
-  flex: 0 0 130px;
+  flex: 0 1 130px;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 1px;

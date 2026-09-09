@@ -17,6 +17,11 @@
 
   const config = { rondas: 3, velocidad: 1, powerups: 1, sonido: 1 };
 
+  // En pantallas táctiles los mandos ocupan una franja en cada borde:
+  // ni el HUD ni las naves se meten debajo.
+  const TACTIL = matchMedia('(pointer: coarse)').matches;
+  const banda = TACTIL ? 100 : 0;
+
   let W = 0, H = 0;
   let estado = 'menu'; // menu | jugando | pausa | fin
   let ronda = 1;
@@ -45,8 +50,8 @@
 
   function colocar() {
     const p1 = jugadores[0], p2 = jugadores[1];
-    p1.x = W / 2; p1.y = H * 0.82; p1.ang = -Math.PI / 2;
-    p2.x = W / 2; p2.y = H * 0.18; p2.ang = Math.PI / 2;
+    p1.x = W / 2; p1.y = Math.min(H * 0.82, H - 40 - banda); p1.ang = -Math.PI / 2;
+    p2.x = W / 2; p2.y = Math.max(H * 0.18, 40 + banda); p2.ang = Math.PI / 2;
     for (const p of jugadores) {
       p.vx = p.vy = 0;
       p.hp = HP_MAX;
@@ -85,7 +90,7 @@
     btn.addEventListener('pointercancel', off);
     btn.addEventListener('pointerleave', off);
   });
-  if (!matchMedia('(pointer: coarse)').matches) document.body.classList.add('no-touch');
+  if (!TACTIL) document.body.classList.add('no-touch');
 
   // ---------- Sonido ----------
   let audio = null;
@@ -120,6 +125,7 @@
     if (estado === 'menu') colocar();
   }
   addEventListener('resize', redimensionar);
+  addEventListener('orientationchange', () => setTimeout(redimensionar, 120));
 
   // ---------- Menú ----------
   document.querySelectorAll('.opts').forEach((grupo) => {
@@ -220,12 +226,13 @@
 
     // Cada nave vive en su propia mitad
     const mitad = H / 2;
+    const fondo = r + banda;
     if (p.id === 1) {
       if (p.y < mitad + r) { p.y = mitad + r; p.vy = Math.abs(p.vy) * 0.5; }
-      if (p.y > H - r) { p.y = H - r; p.vy = -Math.abs(p.vy) * 0.5; }
+      if (p.y > H - fondo) { p.y = H - fondo; p.vy = -Math.abs(p.vy) * 0.5; }
     } else {
       if (p.y > mitad - r) { p.y = mitad - r; p.vy = -Math.abs(p.vy) * 0.5; }
-      if (p.y < r) { p.y = r; p.vy = Math.abs(p.vy) * 0.5; }
+      if (p.y < fondo) { p.y = fondo; p.vy = Math.abs(p.vy) * 0.5; }
     }
 
     for (const campo of ['escudo', 'triple', 'turbo', 'rapido', 'invulnerable']) {
@@ -370,7 +377,7 @@
     if (arriba) { ctx.translate(W, H / 2); ctx.rotate(Math.PI); }
     else ctx.translate(0, H / 2);
     // ahora (0,0) es la esquina "superior izquierda" desde el punto de vista del jugador
-    const y = H / 2 - 26;
+    const y = H / 2 - 26 - banda;
     ctx.fillStyle = p.color;
     ctx.font = 'bold 13px system-ui, sans-serif';
     ctx.textAlign = 'left';
