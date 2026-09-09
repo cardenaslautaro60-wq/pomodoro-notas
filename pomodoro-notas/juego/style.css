@@ -1,0 +1,192 @@
+:root {
+  --p1: #38bdf8;
+  --p2: #fb7185;
+  --bg: #070b16;
+  --panel: #101a2e;
+  --ink: #e8eefc;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Controles táctiles ---------- */
+.touch {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 92px;
+  display: flex;
+  gap: 10px;
+  padding: 10px 14px;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.touch-bottom { bottom: 0; }
+.touch-top { top: 0; transform: rotate(180deg); }
+
+.pad {
+  pointer-events: auto;
+  flex: 0 0 68px;
+  height: 62px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--ink);
+  font-size: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.pad.fire {
+  flex: 0 0 130px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.pad:active { background: rgba(255, 255, 255, 0.22); }
+
+.touch-bottom .pad { border-color: rgba(56, 189, 248, 0.45); }
+.touch-top .pad { border-color: rgba(251, 113, 133, 0.45); }
+
+body.no-touch .touch { display: none; }
+
+/* ---------- Overlays ---------- */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(7, 11, 22, 0.86);
+  backdrop-filter: blur(6px);
+  z-index: 5;
+}
+
+.overlay.hidden { display: none; }
+
+.panel {
+  width: min(460px, 92vw);
+  max-height: 92vh;
+  overflow: auto;
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+.panel.small { width: min(360px, 88vw); }
+
+h1 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, var(--p1), var(--p2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+h2 { margin: 0 0 4px; font-size: 24px; }
+
+.sub {
+  margin: 6px 0 18px;
+  font-size: 13px;
+  opacity: 0.65;
+}
+
+.rows { display: grid; gap: 10px; text-align: left; }
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.opts { display: flex; gap: 6px; }
+
+.opts button {
+  padding: 7px 10px;
+  font-size: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.opts button.on {
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.3), rgba(251, 113, 133, 0.3));
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.cta {
+  margin-top: 18px;
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  border: 0;
+  border-radius: 14px;
+  cursor: pointer;
+  color: #06101f;
+  background: linear-gradient(90deg, var(--p1), var(--p2));
+}
+
+.ghost {
+  margin-top: 8px;
+  width: 100%;
+  padding: 11px;
+  font-size: 13px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.controls {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: grid;
+  gap: 8px;
+  font-size: 12px;
+  text-align: left;
+}
+
+.controls strong { display: block; font-size: 12px; }
+.controls div:nth-child(1) strong { color: var(--p1); }
+.controls div:nth-child(2) strong { color: var(--p2); }
+.controls span { opacity: 0.7; }
+.controls .hint { opacity: 0.5; text-align: center; }
