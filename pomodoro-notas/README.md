@@ -7,6 +7,7 @@ Una app web simple que combina un temporizador Pomodoro con una lista de notas r
 - **Temporizador Pomodoro** con tres modos: Enfoque (25 min), Descanso corto (5 min) y Descanso largo (15 min).
 - Cambio automático de modo al terminar cada ciclo, con sonido de aviso.
 - Contador de ciclos completados, guardado en `localStorage`.
+- **Área recreativa**: al entrar en cualquiera de los dos descansos, la app propone algo concreto para hacer con ese rato, distinto según duren 5 o 15 minutos. El botón "Otra idea" cambia la propuesta. No lleva puntaje ni registro a propósito: medir el recreo lo convertiría en otra tarea.
 - **Notas rápidas**: agregá tareas, marcalas como hechas o eliminalas. Se guardan en `localStorage`.
 - **Tema claro/oscuro** con detección automática de preferencia del sistema.
 
