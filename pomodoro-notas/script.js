@@ -13,6 +13,11 @@ const themeToggle = document.getElementById("theme-toggle");
 const noteForm = document.getElementById("note-form");
 const noteInput = document.getElementById("note-input");
 const noteList = document.getElementById("note-list");
+const recreoCard = document.getElementById("recreo");
+const recreoIdea = document.getElementById("recreo-idea");
+const recreoWhy = document.getElementById("recreo-why");
+const recreoLen = document.getElementById("recreo-len");
+const recreoOtra = document.getElementById("recreo-otra");
 
 let mode = "work";
 let secondsLeft = DURATIONS[mode];
@@ -32,10 +37,57 @@ function render() {
   document.title = `${formatTime(secondsLeft)} - Pomodoro`;
 }
 
+// El recreo: qué hacer mientras corre el descanso. Sin puntaje y sin registro,
+// a propósito — medirlo lo convertiría en otra tarea.
+const RECREO = {
+  short: [
+    { idea: "Parate y estirá la espalda", why: "Veinticinco minutos sentado se pagan en la zona lumbar. Treinta segundos alcanzan." },
+    { idea: "Andá a tomar agua. En serio, ahora", why: "Casi siempre el bajón de las cuatro de la tarde es sed, no cansancio." },
+    { idea: "Mirá algo lejos por un minuto", why: "El ojo enfocado a 60 cm durante horas se cansa. Buscá el punto más lejano que tengas." },
+    { idea: "Diez respiraciones lentas, contadas", why: "Es lo más corto que existe que de verdad baja las pulsaciones." },
+    { idea: "Poné un tema y escuchalo entero", why: "Uno solo, sin hacer nada más al mismo tiempo. Dura lo que dura el descanso." },
+    { idea: "Caminá hasta la otra punta de la casa", why: "Cambiar de habitación cambia la cabeza más rápido que quedarse pensando." },
+    { idea: "Abrí la ventana y quedate ahí", why: "En Comodoro casi siempre hay viento. Sentirlo en la cara es suficiente." },
+    { idea: "No mires el celular hasta que suene", why: "El descanso con scroll no descansa: cambia una pantalla por otra." }
+  ],
+  long: [
+    { idea: "Salí a la vereda a tomar aire", why: "Quince minutos afuera valen más que quince minutos de pausa frente al monitor." },
+    { idea: "Prepará un mate sin apurarte", why: "La parte buena es prepararlo, no tomarlo rápido mientras volvés al trabajo." },
+    { idea: "Caminá la manzana", why: "Entra justo en quince minutos y vuelve con la cabeza en otro lado." },
+    { idea: "Leé algo que no sea para aprender nada", why: "No cuenta para las diez páginas. Es exactamente por eso que sirve." },
+    { idea: "Dibujá cualquier cosa, mal", why: "Sos director creativo: hacer algo feo a propósito descomprime más de lo que parece." },
+    { idea: "Llamá a alguien porque sí", why: "Sin motivo, sin pedirle nada. Quince minutos dan para una charla real." },
+    { idea: "Escuchá un disco, sentado", why: "Sin trabajar de fondo. Escuchar música mientras hacés otra cosa no es escuchar música." },
+    { idea: "No hagas nada. Literalmente", why: "Sentarte y mirar el techo es una opción válida y probablemente la que menos usás." }
+  ]
+};
+
+let ultimaIdea = null;
+
+function proponerRecreo() {
+  if (mode === "work") {
+    recreoCard.hidden = true;
+    return;
+  }
+  const pool = RECREO[mode];
+  let pick = pool[Math.floor(Math.random() * pool.length)];
+  if (pool.length > 1) {
+    while (pick.idea === ultimaIdea) {
+      pick = pool[Math.floor(Math.random() * pool.length)];
+    }
+  }
+  ultimaIdea = pick.idea;
+  recreoIdea.textContent = pick.idea;
+  recreoWhy.textContent = pick.why;
+  recreoLen.textContent = mode === "short" ? "5 minutos" : "15 minutos";
+  recreoCard.hidden = false;
+}
+
 function switchMode(newMode) {
   mode = newMode;
   secondsLeft = DURATIONS[mode];
   modeTabs.forEach((tab) => tab.classList.toggle("active", tab.dataset.mode === mode));
+  proponerRecreo();
   render();
 }
 
@@ -105,20 +157,37 @@ modeTabs.forEach((tab) => {
   });
 });
 
-// Theme toggle
+// Theme toggle. La preferencia guardada gana sobre la del sistema.
 function applyTheme(theme) {
   document.documentElement.dataset.theme = theme;
-  themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
-  localStorage.setItem("pomodoro-theme", theme);
+  themeToggle.textContent = theme === "dark" ? "☀ claro" : "☾ oscuro";
+  themeToggle.setAttribute(
+    "aria-label",
+    theme === "dark" ? "Cambiar a tema claro" : "Cambiar a tema oscuro"
+  );
 }
 
-const savedTheme = localStorage.getItem("pomodoro-theme") ||
-  (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-applyTheme(savedTheme);
+function readStoredTheme() {
+  try {
+    return localStorage.getItem("pomodoro-theme");
+  } catch {
+    return null;
+  }
+}
+
+applyTheme(
+  readStoredTheme() ||
+    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+);
 
 themeToggle.addEventListener("click", () => {
-  const current = document.documentElement.dataset.theme;
-  applyTheme(current === "dark" ? "light" : "dark");
+  const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  try {
+    localStorage.setItem("pomodoro-theme", next);
+  } catch {
+    /* modo privado: el tema vale solo para esta visita */
+  }
+  applyTheme(next);
 });
 
 // Notes
@@ -184,5 +253,8 @@ noteForm.addEventListener("submit", (e) => {
   renderNotes();
 });
 
+recreoOtra.addEventListener("click", proponerRecreo);
+
 render();
 renderNotes();
+proponerRecreo();
