@@ -21,21 +21,20 @@ historial de un chat, se pierde.
 
 | Sesión | ID | Estado | Rama | Qué es |
 |---|---|---|---|---|
-| 🧠 CEREBRO NICO | `session_01GXESuaN5qsrcB9Lw1m7kLE` | idle | `claude/weekly-workflow-organization-h2jc30` | Sistema operativo personal de Nicolás, formato RPG de vida |
+| 🧠 CEREBRO NICO | `session_01GXESuaN5qsrcB9Lw1m7kLE` | idle | `claude/weekly-workflow-organization-h2jc30` ✅ pusheada | Sistema operativo personal de Lautaro: su manera de pensar y estructurar su vida |
 | 👽 Área creativa | `session_01H94bjwamZnLoYKvoCTQLQb` | activa | `claude/determined-hypatia-q8wajc` | Captura y evaluación de ideas → puente a la vida real |
 | Pruebacollage | `session_01LzjpQFqYJahzopvwB5Rpgz` | archivada | — | Sin verificar si tiene relación con "Collage · base de datos y panel" |
 | Collage · base de datos y panel | *(desconocido)* | — | — | **No aparece en el listado de sesiones.** Ver abajo. |
 
 ---
 
-## 🧠 Cerebro Nico
+## 🧠 Cerebro Nico ✅
 
-**Verificado.** Es una sesión real, creada el 2026-09-09, sobre este mismo repo.
+**Rama pusheada.** Ya está segura en el remoto.
 
-Marco: **RPG de vida** — la vida propia tratada como personaje con ficha,
-rachas y límites. Incluye un flujo de "conexión con Dios".
+El sistema operativo personal de Lautaro — cómo piensa y estructura su vida.
 
-Paneles publicados (viven en claude.ai, no en el repo):
+Paneles publicados (viven en claude.ai):
 
 - **La Ficha** — `7526c1cd-15e1-4f20-bf4e-ea17109c168b`
 - **Racha de Nicolás** — `1571c8d5-418a-4bb5-81e5-c7537412a1e7`
@@ -47,38 +46,20 @@ Pendientes declarados por esa sesión:
 - [ ] Rutina de auto-claim
 - [ ] Notificaciones push
 
-### ⚠️ Riesgo abierto
-
-La rama `claude/weekly-workflow-organization-h2jc30` **nunca se pusheó**. No
-está en el remoto. Todo lo que esa sesión escribió en archivos vive sólo en su
-contenedor, que es efímero. Sobreviven los tres paneles y nada más.
-
-Acción sugerida: entrar a esa sesión y pushear la rama antes de seguir.
-
 ---
 
 ## Collage · base de datos y panel
 
-No aparece en el listado de sesiones accesible desde acá. Dos explicaciones
-posibles, ninguna confirmada:
-
-1. Es un chat de claude.ai (no una sesión de Claude Code) — no listable.
-2. Es una sesión en una carpeta cuyo filtro de listado está deshabilitado
-   del lado del servidor.
-
-Lo único registrado del proyecto Collage: **base de datos + panel**. La
-pregunta abierta de ese chat era qué parte adaptarle a Cerebro Nico.
-
-Hipótesis (sin confirmar): lo que le falta a Cerebro Nico no es panel —ya
-tiene tres— sino la **capa de base de datos**, que es justo lo que sus tres
-pendientes tienen en común (filas fantasma, auto-claim, push: todos problemas
-de datos, no de interfaz).
+No aparece en el listado de sesiones accesible desde acá. Está desconectado
+del registro. Sus detalles y cómo conecta con Cerebro Nico están pendientes
+de verificar.
 
 ---
 
 ## Preguntas abiertas
 
-- [ ] ¿Nicolás es cliente, o sos vos en tercera persona?
-- [ ] ¿Dónde vive el chat de Collage y cómo se le llega?
-- [ ] ¿Qué se adapta de Collage a Cerebro Nico — base de datos, panel, ambos?
-- [ ] Título del proyecto nuevo (pendiente desde el chat de Collage)
+- [x] ¿Nicolás es el sistema personal de Lautaro? **Sí.**
+- [ ] ¿Dónde vive el chat de Collage?
+- [ ] ¿Qué es Collage · base de datos y panel?
+- [ ] ¿Qué se adapta de Collage a Cerebro Nico?
+- [ ] ¿Armar Routine cada 3 días para mantener este archivo al día?
