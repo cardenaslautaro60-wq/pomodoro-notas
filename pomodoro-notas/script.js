@@ -157,20 +157,37 @@ modeTabs.forEach((tab) => {
   });
 });
 
-// Theme toggle
+// Theme toggle. La preferencia guardada gana sobre la del sistema.
 function applyTheme(theme) {
   document.documentElement.dataset.theme = theme;
-  themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
-  localStorage.setItem("pomodoro-theme", theme);
+  themeToggle.textContent = theme === "dark" ? "☀ claro" : "☾ oscuro";
+  themeToggle.setAttribute(
+    "aria-label",
+    theme === "dark" ? "Cambiar a tema claro" : "Cambiar a tema oscuro"
+  );
 }
 
-const savedTheme = localStorage.getItem("pomodoro-theme") ||
-  (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-applyTheme(savedTheme);
+function readStoredTheme() {
+  try {
+    return localStorage.getItem("pomodoro-theme");
+  } catch {
+    return null;
+  }
+}
+
+applyTheme(
+  readStoredTheme() ||
+    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+);
 
 themeToggle.addEventListener("click", () => {
-  const current = document.documentElement.dataset.theme;
-  applyTheme(current === "dark" ? "light" : "dark");
+  const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  try {
+    localStorage.setItem("pomodoro-theme", next);
+  } catch {
+    /* modo privado: el tema vale solo para esta visita */
+  }
+  applyTheme(next);
 });
 
 // Notes

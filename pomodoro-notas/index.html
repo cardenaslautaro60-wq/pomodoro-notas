@@ -3,14 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pomodoro + Notas</title>
+  <title>Pomodoro y Recreo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=JetBrains+Mono:wght@400;700&family=Public+Sans:wght@400;500;600&display=swap" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="app">
+    <div class="folio">
+      <span><a href="https://claude.ai/code/artifact/37985efb-9c8a-419b-9b6c-6180fbc9257e">← OS del Cerebro</a></span>
+      <button id="theme-toggle" class="icon-btn" title="Cambiar tema" aria-label="Cambiar tema">tema</button>
+    </div>
+
     <header class="app-header">
-      <h1>Pomodoro</h1>
-      <button id="theme-toggle" class="icon-btn" title="Cambiar tema" aria-label="Cambiar tema">🌙</button>
+      <h1>Pomodoro y Recreo</h1>
+      <p class="app-sub">Bloques de enfoque de veinticinco minutos, y algo concreto que hacer en cada descanso.</p>
     </header>
 
     <section class="timer-card">
@@ -49,12 +57,18 @@
 
     <section class="notes-card">
       <h2>Notas rápidas</h2>
+      <p class="notes-note">Lo que aparezca mientras trabajás y no quieras perseguir ahora.</p>
       <form id="note-form" class="note-form">
-        <input id="note-input" type="text" placeholder="Añadir una tarea..." autocomplete="off" />
+        <input id="note-input" type="text" placeholder="Anotar algo…" autocomplete="off" />
         <button type="submit" class="btn primary">Añadir</button>
       </form>
       <ul id="note-list" class="note-list"></ul>
     </section>
+
+    <footer class="app-footer">
+      Cuatro ciclos de enfoque y el descanso pasa a ser largo.<br>
+      El recreo no lleva registro: medirlo lo convertiría en otra tarea.
+    </footer>
   </main>
 
   <script src="script.js"></script>
